@@ -7,7 +7,8 @@ class TodoInput extends Component {
         this.state = {
             item: ''
         }
-     
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
     onSubmit (e) {
         e.preventDefault()
@@ -23,8 +24,8 @@ class TodoInput extends Component {
     render () {
         return(
             <form onSubmit={this.onSubmit}>
-                <input type="text" ref="item" placeholder="Enter todo" onChange={this.onChange.bind(this)}/>
-                <button type="submit" onClick={this.onSubmit.bind(this)}>Submit</button>
+                <input type="text" ref="item" placeholder="Enter todo" onChange={this.onChange}/>
+                <button type="submit" onClick={this.onSubmit}>Submit</button>
             </form>
         )
     }

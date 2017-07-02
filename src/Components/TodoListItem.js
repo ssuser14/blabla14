@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 
 class TodoListItem extends Component {
+    constructor () {
+        super()
+
+        this.onChangeStatus = this.onChangeStatus.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+    }
     onChangeStatus (e) {
         this.setState({
             value: e.target.checked
+        }, () => {
+            this.props.onItemStatusChanged()
         })
         this.props.children.isDone = e.target.checked
     }
@@ -15,8 +23,8 @@ class TodoListItem extends Component {
         return(
             <li>
                 <span style={{"textDecoration": _style}}>{this.props.children.name}</span>
-                <input type="checkbox" onChange={this.onChangeStatus.bind(this)} defaultChecked={this.props.children.isDone}/>
-                <span onClick={this.handleRemove.bind(this)}>X</span>
+                <input type="checkbox" onChange={this.onChangeStatus} checked={this.props.children.isDone}/>
+                <span onClick={this.handleRemove}>X</span>
             </li>
         )
     }

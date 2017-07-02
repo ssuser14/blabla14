@@ -21,6 +21,10 @@ class App extends Component {
         }
       ]
     }
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onRemove = this.onRemove.bind(this)
+    this.onFilterChange = this.onFilterChange.bind(this)
+    this.updateItemsToRender = this.updateItemsToRender.bind(this)
   }
   componentWillMount () {
     this.onFilterChange('All')
@@ -40,6 +44,9 @@ class App extends Component {
     }, () => {
       this.onFilterChange(this.state.currFilter)
     })
+  }
+  updateItemsToRender () {
+    this.onFilterChange(this.state.currFilter)
   }
   onFilterChange (filterName) {
     switch (filterName) {
@@ -68,9 +75,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <TodoInput onSubmit={this.onSubmit.bind(this)}></TodoInput>
-        <TodoFilter currFilter={this.state.currFilter} onFilterChange={this.onFilterChange.bind(this)}></TodoFilter>
-        <TodoList items={this.state.itemsToRender} onRemove={this.onRemove.bind(this)}></TodoList>
+        <TodoInput onSubmit={this.onSubmit}></TodoInput>
+        <TodoFilter currFilter={this.state.currFilter} onFilterChange={this.onFilterChange}></TodoFilter>
+        <TodoList items={this.state.itemsToRender} onRemove={this.onRemove} updateItemsToRender={this.updateItemsToRender}></TodoList>
       </div>
     );
   }
